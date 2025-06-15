@@ -68,7 +68,7 @@ class Order(models.Model):
         help_text="Postal code for delivery"
     )
     status = models.CharField(
-        max_length=10,
+        max_length=30,
         choices=OrderStatus.choices,
         default=OrderStatus.OPEN,
         db_index=True,
