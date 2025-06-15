@@ -16,5 +16,5 @@ def send_order_email_to_warehouse(sender, instance, created, **kwargs):
     """
     if created:
         subject = f"New Order Created: {instance.order_number}"
-        message = f"An order has been created with the following details:\n\n{instance}"
+        message = f"An order has been created with the following details:\n\nQty: {instance.quantity}\nProduct: {instance.product}\nStatus: {instance.status}\nUser: {instance.email or "N/A"}\nPhone:{instance.phone_number or "N/A"}\n\nPlease process this order at your earliest convenience."
         send_email.delay(subject, message)
