@@ -9,10 +9,10 @@ class Order(models.Model):
     """
 
     class OrderStatus(models.TextChoices):
-        PENDING = 'PENDING', 'Pending'
-        PLACED = 'PLACED', 'Placed'
+        OPEN = 'OPEN', 'Open'
         CONFIRMED = 'CONFIRMED', 'Confirmed'
-        CANCELLED = 'CANCELLED', 'Cancelled'
+        READY_TO_DISPATCH = 'READY_TO_DISPATCH', 'Ready to Dispatch'
+        IN_TRANSIT = 'IN_TRANSIT', 'In Transit'
 
     order_number = models.CharField(
         max_length=100,
@@ -70,7 +70,8 @@ class Order(models.Model):
     status = models.CharField(
         max_length=10,
         choices=OrderStatus.choices,
-        default=OrderStatus.PENDING,
+        default=OrderStatus.OPEN,
+        db_index=True,
         help_text="Current status of the order"
     )
     created_at = models.DateTimeField(
