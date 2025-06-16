@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
 
     'rest_framework',
     'corsheaders',
@@ -150,3 +151,6 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+# Google GenAi
+GOOGLE_GENERATIVE_AI_API_KEY = config("GOOGLE_GENERATIVE_AI_API_KEY")

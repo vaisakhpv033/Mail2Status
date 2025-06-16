@@ -123,9 +123,11 @@ class OrderStatusLog(models.Model):
     """
     order = models.ForeignKey(
         Order,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='status_logs',
-        help_text="Associated order for which the email status was processed"
+        help_text="Associated order for which the email status was processed",
+        blank=True,
+        null=True
     )
     llm_response = models.JSONField(
         blank=True,
