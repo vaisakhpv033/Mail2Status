@@ -1,6 +1,6 @@
 import os
-from celery import Celery
 
+from celery import Celery
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mail2status.settings")
 
@@ -13,8 +13,8 @@ celery_app.autodiscover_tasks()
 def setup_periodic_tasks(sender: Celery, **kwargs):
     sender.add_periodic_task(
         30.0,
-        celery_app.signature('orders.tasks.update_order_status_from_email'),
-        name='add 30'
+        celery_app.signature("orders.tasks.update_order_status_from_email"),
+        name="add 30",
     )
 
 

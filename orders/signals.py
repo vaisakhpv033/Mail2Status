@@ -1,15 +1,17 @@
+from urllib.parse import quote
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Order 
+
+from .models import Order
 from .tasks import send_email
-from urllib.parse import quote
 
 
 @receiver(post_save, sender=Order)
 def send_order_email_to_warehouse(sender, instance, created, **kwargs):
     """
     Signal to send an email to the warehouse team when a new order is created.
-    
+
     Args:
         sender (Model): The model class that sent the signal.
         instance (Order): The instance of the Order that was saved.
@@ -29,8 +31,8 @@ def send_order_email_to_warehouse(sender, instance, created, **kwargs):
                 <p><strong>Quantity:</strong> {instance.quantity}</p>
                 <p><strong>Product:</strong> {instance.product}</p>
                 <p><strong>Status:</strong> {instance.status}</p>
-                <p><strong>User Email:</strong> {instance.email or 'N/A'}</p>
-                <p><strong>Phone:</strong> {instance.phone_number or 'N/A'}</p>
+                <p><strong>User Email:</strong> {instance.email or "N/A"}</p>
+                <p><strong>Phone:</strong> {instance.phone_number or "N/A"}</p>
 
                 <p>Please confirm this order at your earliest convenience.</p>
 
@@ -48,5 +50,5 @@ def send_order_email_to_warehouse(sender, instance, created, **kwargs):
             </body>
         </html>
         """
-    
+
         send_email.delay(subject, html_message)
