@@ -163,7 +163,7 @@ class OrderStatusLog(models.Model):
     )
 
     def __str__(self):
-        return f"Status Log for {self.order.order_number}"
+        return f"Status Log for {(self.order and self.order.order_number) or "N/A"}"
 
     class Meta:
         verbose_name_plural = "Order Status Logs"
